@@ -9,3 +9,8 @@ int main () {
     return 0;
 
 }
+
+// a++ = post increment
+//--b = pre decrement
+// a++ + --b * c - a / c = 4 + 4 * 2 - 5 / 2 = 4 (first use expression) + 8 - 2 ( Integer value not float ) = 10
+// triple d used without space so the answer is = 5410 ( a,b,result)
