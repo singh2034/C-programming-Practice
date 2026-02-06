@@ -29,18 +29,30 @@ int draw_point_3d(SDL_Surface *surface, struct Point point)
     draw_point(surface, x_2d, y_2d);
 }
 
+int draw_points_3d(SDL_Surface *surface, struct Point point[])
+{
+    // sizeof(point) / sizeof(point[0]);
+    int array_length = 100;
+    for (int i = 0; i < array_length; i++)
+    {
+        int x_2d = point[i].x + COORDINATE_SYSTEM_OFFSET_X;
+        int y_2d = point[i].y + COORDINATE_SYSTEM_OFFSET_Y;
+        draw_point(surface, x_2d, y_2d);
+    }
+}
+
 void initialize_cube(struct Point points[], int number_of_points)
 {
-    int number_of_points = 100;
-    struct Point points[number_of_points];
+    // int number_of_points = 100;
+    // struct Point points[number_of_points];
 
     for (int i = 0; i < number_of_points; i++)
     {
-        points[i] = {i,
-                     i,
-                     i};
+        points[i] = (struct Point){i,
+                                   i,
+                                   i};
     }
-    return points;
+    // return points;
 }
 
 int main()
@@ -52,11 +64,11 @@ int main()
     SDL_Window *window = SDL_CreateWindow("3D Cube", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
 
     SDL_Surface *surface = SDL_GetWindowSurface(window);
-    struct Point point = {0, 0, 0};
+    // struct Point point = {0, 0, 0};
     int number_of_points = 100;
     struct Point points[number_of_points];
-    struct Point cube_points[] = initialize_cube(points, number_of_points);
-    draw_point_3d(surface, point);
+    initialize_cube(points, number_of_points);
+    draw_points_3d(surface, points);
 
     // size of the shape & color of shape = white
     // SDL_Rect rect = (SDL_Rect){40, 40, 30, 60};
