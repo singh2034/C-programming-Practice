@@ -55,21 +55,24 @@ void initialize_cube(struct Point points[], int number_of_points)
     {
         points[i] = (struct Point){-SIDE_LENGTH / 2 + i * step_size,
                                    -SIDE_LENGTH / 2, +SIDE_LENGTH / 2};
+        //    Debugger for line 1
+        printf("Line point 1 -- render point at x=%d, y=%d, z=%d\n", points[i].x, points[i].y, points[i].z);
     }
-
     // side 2
     for (int i = points_per_side; i < 2 * points_per_side; i++)
     {
         points[i] = (struct Point){-SIDE_LENGTH / 2 + i * step_size,
-                                   -SIDE_LENGTH / 2, +SIDE_LENGTH / 2};
+                                   SIDE_LENGTH / 2, +SIDE_LENGTH / 2};
+        //    Debugger for line 1
+        printf("Line point 2 -- render point at x=%d, y=%d, z=%d\n", points[i].x, points[i].y, points[i].z);
     }
     // side 3
     for (int i = 2 * points_per_side; i < 3 * points_per_side; i++)
     {
-        points[i] = (struct Point){-SIDE_LENGTH / 2 + i * step_size,
-                                   -SIDE_LENGTH / 2, +SIDE_LENGTH / 2};
+        points[i] = (struct Point){-SIDE_LENGTH / 2,
+                                   -SIDE_LENGTH / 2 + i * step_size, +SIDE_LENGTH / 2};
     }
-    
+
     // return points;
 }
 
