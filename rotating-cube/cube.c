@@ -59,18 +59,83 @@ void initialize_cube(struct Point points[], int number_of_points)
         printf("Line point 1 -- render point at x=%d, y=%d, z=%d\n", points[i].x, points[i].y, points[i].z);
     }
     // side 2
-    for (int i = points_per_side; i < 2 * points_per_side; i++)
+    for (int i = 0; i < points_per_side; i++)
     {
-        points[i] = (struct Point){-SIDE_LENGTH / 2 + i * step_size,
-                                   SIDE_LENGTH / 2, +SIDE_LENGTH / 2};
-        //    Debugger for line 1
+        points[i * points_per_side] = (struct Point){-SIDE_LENGTH / 2 + i * step_size,
+                                                     SIDE_LENGTH / 2, +SIDE_LENGTH / 2};
+        //    Debugger for line 2
         printf("Line point 2 -- render point at x=%d, y=%d, z=%d\n", points[i].x, points[i].y, points[i].z);
     }
     // side 3
-    for (int i = 2 * points_per_side; i < 3 * points_per_side; i++)
+    for (int i = 0; i < points_per_side; i++)
     {
-        points[i] = (struct Point){-SIDE_LENGTH / 2,
-                                   -SIDE_LENGTH / 2 + i * step_size, +SIDE_LENGTH / 2};
+        points[i + 2 * points_per_side] = (struct Point){-SIDE_LENGTH / 2,
+                                                         -SIDE_LENGTH / 2 + i * step_size, +SIDE_LENGTH / 2};
+    }
+
+    // side 4
+    for (int i = 0; i < points_per_side; i++)
+    {
+        points[i + 3 * points_per_side] = (struct Point){SIDE_LENGTH / 2,
+                                                         -SIDE_LENGTH / 2 + i * step_size, +SIDE_LENGTH / 2};
+    }
+
+    // side 5
+    for (int i = 0; i < points_per_side; i++)
+    {
+        points[i + 4 * points_per_side] = (struct Point){-SIDE_LENGTH / 2 + i * step_size,
+                                                         -SIDE_LENGTH / 2, -SIDE_LENGTH / 2};
+        //    Debugger for line 3
+        printf("Line point 1 -- render point at x=%d, y=%d, z=%d\n", points[i].x, points[i].y, points[i].z);
+    }
+    // side 6
+    for (int i = 0; i < points_per_side; i++)
+    {
+        points[i + 5 * points_per_side] = (struct Point){-SIDE_LENGTH / 2 + i * step_size,
+                                                         SIDE_LENGTH / 2, -SIDE_LENGTH / 2};
+        //    Debugger for line 4
+        printf("Line point 2 -- render point at x=%d, y=%d, z=%d\n", points[i].x, points[i].y, points[i].z);
+    }
+    // side 7
+    for (int i = 0; i < points_per_side; i++)
+    {
+        points[i + 6 * points_per_side] = (struct Point){-SIDE_LENGTH / 2,
+                                                         -SIDE_LENGTH / 2 + i * step_size, -SIDE_LENGTH / 2};
+    }
+
+    // side 8
+    for (int i = 0; i < points_per_side; i++)
+    {
+        points[i + 7 * points_per_side] = (struct Point){SIDE_LENGTH / 2,
+                                                         -SIDE_LENGTH / 2 + i * step_size, -SIDE_LENGTH / 2};
+    }
+
+    // side 9
+    for (int i = 0; i < points_per_side; i++)
+    {
+        points[i + 8 * points_per_side] = (struct Point){-SIDE_LENGTH / 2,
+                                                         -SIDE_LENGTH / 2, -SIDE_LENGTH / 2 + i * step_size};
+    }
+
+    // side 10
+    for (int i = 0; i < points_per_side; i++)
+    {
+        points[i + 9 * points_per_side] = (struct Point){SIDE_LENGTH / 2,
+                                                         -SIDE_LENGTH / 2, -SIDE_LENGTH / 2 + i * step_size};
+    }
+
+    // side 11
+    for (int i = 0; i < points_per_side; i++)
+    {
+        points[i + 10 * points_per_side] = (struct Point){SIDE_LENGTH / 2,
+                                                          SIDE_LENGTH / 2, -SIDE_LENGTH / 2 + i * step_size};
+    }
+
+    // side 12
+    for (int i = 0; i < points_per_side; i++)
+    {
+        points[i + 11 * points_per_side] = (struct Point){-SIDE_LENGTH / 2,
+                                                          SIDE_LENGTH / 2, -SIDE_LENGTH / 2 + i * step_size};
     }
 
     // return points;
