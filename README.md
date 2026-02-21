@@ -1,5 +1,15 @@
-# C-programming-Practice
-Some projects which is in progress.
-If you find any thing in rotating-cube like errors related to SDLC error :- Fix it by installing the dependencies.
-In Linux based systems :- sudo apt install libsdl2-dev (apt based systems i.e - Ubuntu, Debian etc.) use dnf or pacman for fedora or arch.
-For Windows, find it your self and this is only for programming, otherwise you can use the software without any dependencies, mainly a graphic.
+# C-Programming Practice
+A collection of ongoing C projects exploring graphics, physics, and logic.
+
+---
+
+## 🧊 Project: Rotating Cube
+A 3D wireframe cube rendered in the terminal/window using the SDL2 library.
+
+### 🛠 Prerequisites & Installation
+To compile and run the graphics projects, you must have the **SDL2** development libraries installed on your system.
+
+#### **Linux (Debian/Ubuntu/Mint)**
+```bash
+sudo apt update
+sudo apt install libsdl2-dev
