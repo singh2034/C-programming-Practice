@@ -37,7 +37,7 @@
 
 <p>To compile the project with the necessary libraries linked, run the following command in your terminal:</p>
 
-<pre><code>gcc rotating-cube/cube.c -o cube -lSDL2 -lm</code></pre>
+<pre><code>cc -o cube cube.c `sdl2-config --cflags --libs`</code></pre>
 
 <ul>
   <li><code>-lSDL2</code>: Tells the compiler to use the SDL2 library.</li>
@@ -54,5 +54,5 @@
 </ul>
 
 <div align="right">
-  <em>Maintained by Luna</em>
+  <em>Maintained by Luna & Moose</em>
 </div>
