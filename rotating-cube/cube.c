@@ -48,7 +48,7 @@ void initialize_cube(struct Point points[], int number_of_points)
     // cube has 12 sides
     int points_per_side = number_of_points / 12;
 
-    int SIDE_LENGTH = 50;
+    int SIDE_LENGTH = 200;
     int step_size = SIDE_LENGTH / points_per_side;
     // side 1
     for (int i = 0; i < points_per_side; i++)
@@ -61,7 +61,7 @@ void initialize_cube(struct Point points[], int number_of_points)
     // side 2
     for (int i = 0; i < points_per_side; i++)
     {
-        points[i * points_per_side] = (struct Point){-SIDE_LENGTH / 2 + i * step_size,
+        points[i + points_per_side] = (struct Point){-SIDE_LENGTH / 2 + i * step_size,
                                                      SIDE_LENGTH / 2, +SIDE_LENGTH / 2};
         //    Debugger for line 2
         printf("Line point 2 -- render point at x=%d, y=%d, z=%d\n", points[i].x, points[i].y, points[i].z);
@@ -151,7 +151,7 @@ int main()
 
     SDL_Surface *surface = SDL_GetWindowSurface(window);
     // struct Point point = {0, 0, 0};
-    int number_of_points = 120;
+    int number_of_points = 1200;
     struct Point points[number_of_points];
     initialize_cube(points, number_of_points);
     draw_points_3d(surface, points, number_of_points);
