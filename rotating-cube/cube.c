@@ -61,6 +61,7 @@ void initialize_cube(struct Point points[], int number_of_points)
     // side 2
     for (int i = 0; i < points_per_side; i++)
     {
+        // mistake was here the number was big because of multiplication instead of addition
         points[i + points_per_side] = (struct Point){-SIDE_LENGTH / 2 + i * step_size,
                                                      SIDE_LENGTH / 2, +SIDE_LENGTH / 2};
         //    Debugger for line 2
