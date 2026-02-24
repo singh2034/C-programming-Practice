@@ -8,12 +8,12 @@
 
 <h2>🧊 Project: Rotating Cube</h2>
 
-<p>This project renders a 3D wireframe cube in a window. It relies on the <strong>SDL2</strong> (Simple DirectMedia Layer) library for graphical output.</p>
+<p>This project renders a 3D wireframe cube in a window. It relies on the <strong>SDL2</strong> library for graphics and the standard <strong>Math</strong> library for rotation calculations.</p>
 
 <details open>
-  <summary><strong>⚠️ Troubleshooting: "SDL.h not found"</strong></summary>
+  <summary><strong>🛠️ Installation & Setup</strong></summary>
   <br>
-  <p>If you see errors related to <code>SDL2/SDL.h</code>, you must install the development dependencies for your operating system:</p>
+  <p>If you see errors related to <code>SDL2/SDL.h</code>, install the development dependencies:</p>
   
   <h4>🐧 Linux (Ubuntu/Debian/Mint)</h4>
   <pre><code>sudo apt update && sudo apt install libsdl2-dev</code></pre>
@@ -23,30 +23,27 @@
     <li><strong>Fedora:</strong> <code>sudo dnf install SDL2-devel</code></li>
     <li><strong>Arch:</strong> <code>sudo pacman -S sdl2</code></li>
   </ul>
-
-  <h4>🪟 Windows</h4>
-  <blockquote>
-    Windows users must manually link the SDL2 <code>.dll</code> and <code>.lib</code> files. You can find these on the 
-    <a href="https://github.com/libsdl-org/SDL/releases">Official SDL GitHub</a>.
-  </blockquote>
 </details>
 
 <hr>
 
-<h2>🛠️ Compilation Guide</h2>
+<h2>🏗️ Compilation Guide</h2>
 
-<p>To compile the project with the necessary libraries linked, run the following command in your terminal:</p>
+<p>To compile the project correctly, you must link both the SDL2 and Math libraries:</p>
 
 <pre><code>cc -o cube cube.c `sdl2-config --cflags --libs`</code></pre>
+<pre><code>cc -o cube cube.c -lm `sdl2-config --cflags --libs`</code></pre>
 
-<ul>
-  <li><code>-lSDL2</code>: Tells the compiler to use the SDL2 library.</li>
-  <li><code>-lm</code>: Links the math library (needed for <code>sin</code> and <code>cos</code> functions).</li>
-</ul>
+<blockquote>
+  <strong>⚠️ Important: The <code>-lm</code> Flag</strong><br>
+  If you receive a <code>DSO missing from command line</code> or <code>undefined reference to cos/sin</code> error, it is because the Math library isn't linked. 
+  <br><br>
+  <em>Only include <strong>-lm</strong> when your code uses mathematical functions like <code>sin()</code>, <code>cos()</code>, <code>tan()</code>, or <code>sqrt()</code>.</em>
+</blockquote>
 
 <hr>
 
-<h2>📅 Project Roadmap</h2>
+<h2>📅 Project Status</h2>
 <ul>
   <li>✅ Setup Basic Rendering</li>
   <li>🚧 Rotating Cube Logic (In Progress)</li>
@@ -54,5 +51,5 @@
 </ul>
 
 <div align="right">
-  <em>Maintained by Luna & Moose</em>
+  <em>Maintained by Luna</em>
 </div>
