@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <SDL2/SDL.h> //graphic library of C
+#include <math.h>
 
 #define SCREEN_WIDTH 900
 #define SCREEN_HEIGHT 600
@@ -39,6 +40,32 @@ int draw_points_3d(SDL_Surface *surface, struct Point points[], int number_of_po
         draw_point(surface, x_2d, y_2d);
     }
 }
+
+// matrix rotation for graphics
+double phi = 5;
+
+void apply_rotation(struct Point *point, double phi)
+{
+    double rotation_matrix[3][3] = {
+        {cos(phi), 0, 0},
+        {0, 1, 0},
+        {0, 0, 1},
+    };
+    int point_vector[3] = {point->x, point->y, point->z};
+    int result_point[3];
+    for (int i = 0; i < 3; i++)
+    {
+        double dot_product = 0;
+        for (int j = 0; j < 3; j++)
+        {
+            dot_product += rotation_matrix[i][j] * point_vector[j];
+        }
+        result_point[i] = dot_product;
+    }
+    point->x = result_point[0];
+    point->y = result_point[1];
+    point->z = result_point[2];
+};
 
 void initialize_cube(struct Point points[], int number_of_points)
 {
@@ -156,11 +183,13 @@ int main()
     struct Point points[number_of_points];
     initialize_cube(points, number_of_points);
     draw_points_3d(surface, points, number_of_points);
+    for (int i = 0; i < number_of_points; i++)
+        apply_rotation(&points[i], 0.5);
 
     // size of the shape & color of shape = white
     // SDL_Rect rect = (SDL_Rect){40, 40, 30, 60};
     // SDL_FillRect(surface, &rect, 0xffffffff);
-
+    draw_points_3d(surface, points, number_of_points);
     SDL_UpdateWindowSurface(window);
 
     // Hold the window for 5 seconds
