@@ -160,7 +160,7 @@ void initialize_cube(struct Point points[], int number_of_points)
     // return points;
 }
 
-int main()
+int main(int argc, char *argv[])
 {
     // Intialize a Window
     SDL_Init(SDL_INIT_VIDEO);

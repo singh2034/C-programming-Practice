@@ -31,7 +31,7 @@
 
 <p>Because this project uses both <strong>SDL2</strong> for graphics and <code>math.h</code> for rotation matrices, you must link both libraries:</p>
 
-<pre><code>gcc rotating-cube/cube.c -o cube -lSDL2 -lm</code></pre>
+<pre><code>cc -o cube cube.c -lm `sdl2-config --cflags --libs`</code></pre>
 
 <blockquote>
   <strong>⚠️ Linker Warning:</strong><br>
