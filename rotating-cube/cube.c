@@ -177,10 +177,10 @@ int main()
     draw_points_3d(surface, points, number_of_points);
     SDL_Event event;
     int simulation_running = 1;
-    double rotation_step = 0.01;
+    // double rotation_step = 0.01;
     double alpha = 0.01;
-    double beta = 0.01;
-    double gamma = 0.01;
+    double beta = 0.03;
+    double gamma = 0.005;
     while (simulation_running)
     {
         while (SDL_PollEvent(&event))
@@ -194,7 +194,7 @@ int main()
         draw_points_3d(surface, points, number_of_points);
 
         SDL_UpdateWindowSurface(window);
-        SDL_Delay(10);
+        SDL_Delay(20);
     }
     // size of the shape & color of shape = white
     // SDL_Rect rect = (SDL_Rect){40, 40, 30, 60};
