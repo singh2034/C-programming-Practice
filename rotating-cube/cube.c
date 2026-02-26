@@ -5,15 +5,16 @@
 #define SCREEN_WIDTH 900
 #define SCREEN_HEIGHT 600
 #define Color_white 0xffffffff
+#define Color_black 0x00000000
 #define POINT_SIZE 5
 #define COORDINATE_SYSTEM_OFFSET_X SCREEN_WIDTH / 2
 #define COORDINATE_SYSTEM_OFFSET_Y SCREEN_HEIGHT / 2
 
 struct Point
 {
-    int x;
-    int y;
-    int z;
+    double x;
+    double y;
+    double z;
 };
 
 int draw_point(SDL_Surface *surface, int x, int y)
@@ -47,12 +48,12 @@ double phi = 5;
 void apply_rotation(struct Point *point, double phi)
 {
     double rotation_matrix[3][3] = {
-        {cos(phi), 0, 0},
+        {cos(phi), 0, sin(phi)},
         {0, 1, 0},
-        {0, 0, 1},
+        {-sin(phi), 0, cos(phi)},
     };
-    int point_vector[3] = {point->x, point->y, point->z};
-    int result_point[3];
+    double point_vector[3] = {point->x, point->y, point->z};
+    double result_point[3];
     for (int i = 0; i < 3; i++)
     {
         double dot_product = 0;
@@ -71,7 +72,6 @@ void initialize_cube(struct Point points[], int number_of_points)
 {
     // int number_of_points = 100;
     // struct Point points[number_of_points];
-
     // cube has 12 sides
     int points_per_side = number_of_points / 12;
 
@@ -82,8 +82,6 @@ void initialize_cube(struct Point points[], int number_of_points)
     {
         points[i] = (struct Point){-SIDE_LENGTH / 2 + i * step_size,
                                    -SIDE_LENGTH / 2, +SIDE_LENGTH / 2};
-        //    Debugger for line 1
-        printf("Line point 1 -- render point at x=%d, y=%d, z=%d\n", points[i].x, points[i].y, points[i].z);
     }
     // side 2
     for (int i = 0; i < points_per_side; i++)
@@ -91,8 +89,6 @@ void initialize_cube(struct Point points[], int number_of_points)
         // mistake was here the number was big because of multiplication instead of addition
         points[i + points_per_side] = (struct Point){-SIDE_LENGTH / 2 + i * step_size,
                                                      SIDE_LENGTH / 2, +SIDE_LENGTH / 2};
-        //    Debugger for line 2
-        printf("Line point 2 -- render point at x=%d, y=%d, z=%d\n", points[i].x, points[i].y, points[i].z);
     }
     // side 3
     for (int i = 0; i < points_per_side; i++)
@@ -113,16 +109,12 @@ void initialize_cube(struct Point points[], int number_of_points)
     {
         points[i + 4 * points_per_side] = (struct Point){-SIDE_LENGTH / 2 + i * step_size,
                                                          -SIDE_LENGTH / 2, -SIDE_LENGTH / 2};
-        //    Debugger for line 3
-        printf("Line point 1 -- render point at x=%d, y=%d, z=%d\n", points[i].x, points[i].y, points[i].z);
     }
     // side 6
     for (int i = 0; i < points_per_side; i++)
     {
         points[i + 5 * points_per_side] = (struct Point){-SIDE_LENGTH / 2 + i * step_size,
                                                          SIDE_LENGTH / 2, -SIDE_LENGTH / 2};
-        //    Debugger for line 4
-        printf("Line point 2 -- render point at x=%d, y=%d, z=%d\n", points[i].x, points[i].y, points[i].z);
     }
     // side 7
     for (int i = 0; i < points_per_side; i++)
@@ -179,19 +171,31 @@ int main()
 
     SDL_Surface *surface = SDL_GetWindowSurface(window);
     // struct Point point = {0, 0, 0};
+    SDL_Rect black_screen_rect = (SDL_Rect){0, 0, SCREEN_WIDTH, SCREEN_HEIGHT};
     int number_of_points = 1200;
     struct Point points[number_of_points];
     initialize_cube(points, number_of_points);
     draw_points_3d(surface, points, number_of_points);
-    for (int i = 0; i < number_of_points; i++)
-        apply_rotation(&points[i], 0.5);
+    SDL_Event event;
+    int simulation_running = 1;
+    double rotation_step = 0.01;
+    while (simulation_running)
+    {
+        while (SDL_PollEvent(&event))
+        {
+            if (event.type == SDL_QUIT)
+                simulation_running = 0;
+        }
+        SDL_FillRect(surface, &black_screen_rect, Color_black);
+        for (int i = 0; i < number_of_points; i++)
+            apply_rotation(&points[i], rotation_step);
+        draw_points_3d(surface, points, number_of_points);
 
+        SDL_UpdateWindowSurface(window);
+        SDL_Delay(10);
+    }
     // size of the shape & color of shape = white
     // SDL_Rect rect = (SDL_Rect){40, 40, 30, 60};
     // SDL_FillRect(surface, &rect, 0xffffffff);
-    draw_points_3d(surface, points, number_of_points);
-    SDL_UpdateWindowSurface(window);
-
     // Hold the window for 5 seconds
-    SDL_Delay(5000);
 }
