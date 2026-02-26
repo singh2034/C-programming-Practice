@@ -45,13 +45,12 @@ int draw_points_3d(SDL_Surface *surface, struct Point points[], int number_of_po
 // matrix rotation for graphics
 double phi = 5;
 
-void apply_rotation(struct Point *point, double phi)
+void apply_rotation(struct Point *point, double alpha, double beta, double gamma)
 {
     double rotation_matrix[3][3] = {
-        {cos(phi), 0, sin(phi)},
-        {0, 1, 0},
-        {-sin(phi), 0, cos(phi)},
-    };
+        {cos(alpha) * cos(beta), cos(alpha) * sin(beta) * sin(gamma) - sin(alpha) * cos(gamma), cos(alpha) * sin(beta) * cos(gamma) + sin(alpha) * sin(gamma)},
+        {sin(alpha) * cos(beta), sin(alpha) * sin(beta) * sin(gamma) + cos(alpha) * cos(gamma), sin(alpha) * sin(beta) * cos(gamma) - cos(alpha) * sin(gamma)},
+        {-sin(beta), cos(beta) * sin(gamma), cos(beta) * cos(gamma)}};
     double point_vector[3] = {point->x, point->y, point->z};
     double result_point[3];
     for (int i = 0; i < 3; i++)
@@ -179,6 +178,9 @@ int main()
     SDL_Event event;
     int simulation_running = 1;
     double rotation_step = 0.01;
+    double alpha = 0.01;
+    double beta = 0.01;
+    double gamma = 0.01;
     while (simulation_running)
     {
         while (SDL_PollEvent(&event))
@@ -188,7 +190,7 @@ int main()
         }
         SDL_FillRect(surface, &black_screen_rect, Color_black);
         for (int i = 0; i < number_of_points; i++)
-            apply_rotation(&points[i], rotation_step);
+            apply_rotation(&points[i], alpha, beta, gamma);
         draw_points_3d(surface, points, number_of_points);
 
         SDL_UpdateWindowSurface(window);
