@@ -6,3 +6,4 @@ git status
 read -p "Your commit?: " commit_name
 git commit -m "${commit_name}"
 git push
+git status
