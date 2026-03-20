@@ -18,4 +18,6 @@ int main(int argc, char *argv[])
 
     struct input_event input_event;
     read(fd, &input_event, sizeof(input_event));
+
+    
 }
