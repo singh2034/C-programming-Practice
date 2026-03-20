@@ -3,6 +3,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <linux/input.h>
+#include <sys/time.h>
 
 int main(int argc, char *argv[])
 {
@@ -18,6 +19,6 @@ int main(int argc, char *argv[])
 
     struct input_event input_event;
     read(fd, &input_event, sizeof(input_event));
-
-    
+    struct timeval time = input_event.time;
+    printf("Event at=%lds %ldus\n", time.tv_sec, time.tv_usec);
 }
